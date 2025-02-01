@@ -31,7 +31,7 @@ const realBrowserOption = {
 
 test('DrissionPage Detector', async () => {
     const { page, browser } = await connect(realBrowserOption)
-    await page.goto("https://drissionpage.pages.dev/");
+    await page.goto("https://web.archive.org/web/20240913054632/https://drissionpage.pages.dev/");
     await page.realClick("#detector")
     let result = await page.evaluate(() => { return document.querySelector('#isBot span').textContent.includes("not") ? true : false })
     await browser.close()
