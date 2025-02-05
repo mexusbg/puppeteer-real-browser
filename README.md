@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo will no longer receive updates. Thank you to everyone who supported it.
+> 
 <br/>
 <p align="center">
   <a href="https://github.com/zfcsoftware/puppeteer-real-browser">
