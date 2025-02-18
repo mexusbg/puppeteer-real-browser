@@ -1,6 +1,8 @@
+[![ScrapeDo](data/sdo.png)](https://scrape.do/?utm_source=github&utm_medium=repo_prb)
+
 > [!WARNING]
 > This repo will no longer receive updates. Thank you to everyone who supported it.
-> 
+
 <br/>
 <p align="center">
   <a href="https://github.com/zfcsoftware/puppeteer-real-browser">
@@ -21,7 +23,6 @@
 <video src='https://github.com/user-attachments/assets/5dddca09-6941-42e9-9427-5c666632483f'/>
 </p>
 
-
 <p align="center">
   <img src="https://img.shields.io/github/contributors/zfcsoftware/puppeteer-real-browser?color=dark-green" alt="Contributors" />
   <img src="https://img.shields.io/github/forks/zfcsoftware/puppeteer-real-browser?style=social" alt="Forks" />
@@ -38,7 +39,6 @@
 
 If you are using a Linux operating system, xvfb must be installed for the library to work correctly.
 
-
 ```bash
 npm i puppeteer-real-browser
 ```
@@ -49,66 +49,56 @@ if you are using linux:
 sudo apt-get install xvfb
 ```
 
-
-
 ## Include
 
 ### CommonJS
 
 ```js
-const { connect } = require('puppeteer-real-browser');
+const { connect } = require("puppeteer-real-browser");
 
 const start = async () => {
-    const { page, browser } = await connect()
-}
-
+  const { page, browser } = await connect();
+};
 ```
+
 ### Module
 
 ```js
+import { connect } from "puppeteer-real-browser";
 
-import { connect } from 'puppeteer-real-browser'
-
-const { page, browser } = await connect()
-
+const { page, browser } = await connect();
 ```
 
 ## Usage
 
-
 ```js
-
-const { connect } = require("puppeteer-real-browser")
+const { connect } = require("puppeteer-real-browser");
 
 async function test() {
+  const { browser, page } = await connect({
+    headless: false,
 
-    const { browser, page } = await connect({
+    args: [],
 
-        headless: false,
+    customConfig: {},
 
-        args: [],
+    turnstile: true,
 
-        customConfig: {},
+    connectOption: {},
 
-        turnstile: true,
-
-        connectOption: {},
-
-        disableXvfb: false,
-        ignoreAllFlags: false
-        // proxy:{
-        //     host:'<proxy-host>',
-        //     port:'<proxy-port>',
-        //     username:'<proxy-username>',
-        //     password:'<proxy-password>'
-        // }
-
-    })
-    await page.goto('<url>')
-
+    disableXvfb: false,
+    ignoreAllFlags: false,
+    // proxy:{
+    //     host:'<proxy-host>',
+    //     port:'<proxy-port>',
+    //     username:'<proxy-username>',
+    //     password:'<proxy-password>'
+    // }
+  });
+  await page.goto("<url>");
 }
 
-test()
+test();
 ```
 
 **headless**: The default value is false. Values such as “new”, true, “shell” can also be sent, but it works most stable when false is used.
@@ -122,11 +112,12 @@ Supported flags: https://github.com/GoogleChrome/chrome-launcher/blob/main/docs/
 
 **connectOption:** The variables you send when connecting to chromium created with puppeteer.connect are added
 
-**disableXvfb:** In Linux, when headless is false, a virtual screen is created and the browser is run there.  You can set this value to true if you want to see the browser.
+**disableXvfb:** In Linux, when headless is false, a virtual screen is created and the browser is run there. You can set this value to true if you want to see the browser.
 
 **ignoreAllFlags** If true, all initialization arguments are overridden. This includes the let's get started page that appears on the first load.
 
 ## How to Install Puppeteer-extra Plugins?
+
 Some plugins, such as puppeteer-extra-plugin-anonymize-ua, may cause you to be detected. You can use the plugin installation test in the library's test file to see if it will cause you to be detected.
 
 The following is an example of installing a plugin. You can install other plugins in the same way as this example.
@@ -136,30 +127,26 @@ npm i puppeteer-extra-plugin-click-and-wait
 ```
 
 ```js
+const test = require("node:test");
+const assert = require("node:assert");
+const { connect } = require("puppeteer-real-browser");
 
-const test = require('node:test');
-const assert = require('node:assert');
-const { connect } = require('puppeteer-real-browser');
-
-test('Puppeteer Extra Plugin', async () => {
-    const { page, browser } = await connect({
-        args: ["--start-maximized"],
-        turnstile: true,
-        headless: false,
-        // disableXvfb: true,
-        customConfig: {},
-        connectOption: {
-            defaultViewport: null
-        },
-        plugins: [
-            require('puppeteer-extra-plugin-click-and-wait')()
-        ]
-    })
-    await page.goto("https://google.com", { waitUntil: "domcontentloaded" })
-    await page.clickAndWaitForNavigation('body')
-    await browser.close()
-})
-
+test("Puppeteer Extra Plugin", async () => {
+  const { page, browser } = await connect({
+    args: ["--start-maximized"],
+    turnstile: true,
+    headless: false,
+    // disableXvfb: true,
+    customConfig: {},
+    connectOption: {
+      defaultViewport: null,
+    },
+    plugins: [require("puppeteer-extra-plugin-click-and-wait")()],
+  });
+  await page.goto("https://google.com", { waitUntil: "domcontentloaded" });
+  await page.clickAndWaitForNavigation("body");
+  await browser.close();
+});
 ```
 
 ## Docker
@@ -167,7 +154,6 @@ test('Puppeteer Extra Plugin', async () => {
 You can use the Dockerfile file in the main directory to use this library with docker. It has been tested with docker on Ubuntu server operating systems.
 
 To run a test, you can follow these steps
-
 
 ```bash
 git clone https://github.com/zfcsoftware/puppeteer-real-browser
@@ -181,7 +167,6 @@ cd puppeteer-real-browser
 docker build -t puppeteer-real-browser-project .
 ```
 
-
 ```bash
 docker run puppeteer-real-browser-project
 ```
@@ -190,29 +175,32 @@ docker run puppeteer-real-browser-project
 
 This library is completely open source and is constantly being updated. Please star this repo to support this project. Starring and supporting the project will ensure that it receives updates. If you want to support it further, you can consider sponsoring me (https://github.com/sponsors/zfcsoftware)
 
-
 ## Quick Questions and Answers
 
 ### I Cannot Access Functions in Window Object What Should I Do?
 
-This problem is probably caused by the runtime being closed by the rebrowser used. 
+This problem is probably caused by the runtime being closed by the rebrowser used.
 https://github.com/zfcsoftware/puppeteer-real-browser/tree/access-window
 I created a branch for this. You can access the value you want by adding javascript to the page source with puppeteer-intercept-and-modify-requests as done in success.js. If you know about the Chrome plugin, you can also use it.
 
 ### page.setViewport method is not working, what should I do?
+
 As with the initialization arguments in the test module, you can set the defaultViewport in connectOption. If you set null, it will take up as much space as the width of the Browser.
 
-### Does the library have any known detection problems? 
-using puppeteer-core patched with rebrowser. Tested with the challenging sites in the test file in headless false mode and passed with flying colors. The only known issue is that the mouse screeenX does not match the mouse position. This has been patched in the library. 
+### Does the library have any known detection problems?
+
+using puppeteer-core patched with rebrowser. Tested with the challenging sites in the test file in headless false mode and passed with flying colors. The only known issue is that the mouse screeenX does not match the mouse position. This has been patched in the library.
 
 The ghost-cursor is included in the library. (https://github.com/zfcsoftware/puppeteer-real-browser/blob/2a5fba37a85c15625fb3c8d1f7cf8dcb109b9492/lib/cjs/module/pageController.js#L54) You can use ghost-cursor with page.realCursor. page.click It is recommended to use page.realClick instead of page.click.
 
 ### What Makes This Library Special?
-This library lets you launch and use Chrome in its most natural state. It tries to get the best results with minimal patching. Thanks to @nwebson who fixed the Runtime.enable issue from this point. If using rebrowser solves your problem, I don't recommend using real browser. 
+
+This library lets you launch and use Chrome in its most natural state. It tries to get the best results with minimal patching. Thanks to @nwebson who fixed the Runtime.enable issue from this point. If using rebrowser solves your problem, I don't recommend using real browser.
 
 Real browser does not give you full control over launching. It launches Chrome with Chrome launcher and connects to it with rebrowser.
 
 ### Why can't I pass Recaptcha v3?
+
 https://stackoverflow.com/questions/52546045/how-to-pass-recaptcha-v3
 
 Please see the answers in the link above. When there is no Google session, no matter how good your browser is, recaptcha identifies you as a bot. It is a common problem.
@@ -225,10 +213,10 @@ Distributed under the MIT License. See [LICENSE](https://github.com/zfcsoftware/
 
 **Contributions to the current version**
 
-* **rebrowser™** - [rebrowser™](https://github.com/rebrowser) - *Created a patch pack for Runtime, which left many traces behind. Since Runtime was not used, most problems were solved. TargetFilter, which was used in the past and caused many problems, was switched to this patch. The Puppeteer-core library was patched and added to this repo. A lot of good bot detection systems are not caught thanks to rebrowser. Please star the rebrowser repo. Thank you. (https://github.com/rebrowser/rebrowser-patches)*
+- **rebrowser™** - [rebrowser™](https://github.com/rebrowser) - _Created a patch pack for Runtime, which left many traces behind. Since Runtime was not used, most problems were solved. TargetFilter, which was used in the past and caused many problems, was switched to this patch. The Puppeteer-core library was patched and added to this repo. A lot of good bot detection systems are not caught thanks to rebrowser. Please star the rebrowser repo. Thank you. (https://github.com/rebrowser/rebrowser-patches)_
 
-* **Skill Issue™** - [TheFalloutOf76](https://github.com/TheFalloutOf76) - *He realized that mouse movements could not be simulated accurately and created a solution for this. His solution is used in this library. (https://github.com/TheFalloutOf76/CDP-bug-MouseEvent-.screenX-.screenY-patcher)*
-  
+- **Skill Issue™** - [TheFalloutOf76](https://github.com/TheFalloutOf76) - _He realized that mouse movements could not be simulated accurately and created a solution for this. His solution is used in this library. (https://github.com/TheFalloutOf76/CDP-bug-MouseEvent-.screenX-.screenY-patcher)_
+
 ## Disclaimer of Liability
 
 No responsibility is accepted for the use of this software. This software is intended for educational and informational purposes only. Users should use this software at their own risk. The developer cannot be held liable for any damages that may result from the use of this software.
