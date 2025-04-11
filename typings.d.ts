@@ -24,6 +24,7 @@ declare module "puppeteer-real-browser" {
 		disableXvfb?: boolean;
 		plugins?: import("puppeteer-extra").PuppeteerExtraPlugin[];
 		ignoreAllFlags?: boolean;
+		chromePort?: number;
 	}
 
 	interface ProxyOptions {
